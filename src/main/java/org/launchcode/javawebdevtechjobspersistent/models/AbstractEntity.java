@@ -10,12 +10,15 @@ import java.util.Objects;
 @MappedSuperclass
 public abstract class AbstractEntity {
 
+    //Since subclasses of AbstractEntity will be entities
+    //added @Id & @GeneratedValue annotations to field id
     @Id
     @GeneratedValue
     private int id;
 
-    @NotBlank
-    @Size(min = 1, max = 100)
+
+    @NotBlank //added to that use cannot leave field blank
+    @Size(min = 1, max = 100) //employer names might be > 50 char
     private String name;
 
     public int getId() {
