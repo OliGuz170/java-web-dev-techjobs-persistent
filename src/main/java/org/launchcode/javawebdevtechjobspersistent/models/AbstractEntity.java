@@ -18,7 +18,7 @@ public abstract class AbstractEntity {
 
 
     @NotBlank //added to that use cannot leave field blank
-    @Size(min = 1, max = 100) //employer names might be > 50 char
+    @Size(max = 100) //employer names might be > 50 char
     private String name;
 
     public int getId() {

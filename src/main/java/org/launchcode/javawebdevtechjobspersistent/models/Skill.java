@@ -18,5 +18,17 @@ public class Skill extends AbstractEntity {
     @ManyToMany(mappedBy = "skills")
     private List<Job> jobs = new ArrayList<>();
 
+    public Skill(@Size(max = 500) String skillDescription){
+        this.skillDescription = skillDescription;
+    }
+
     public Skill () {}
+
+    public String getSkillDescription() {
+        return skillDescription;
+    }
+
+    public void setSkillDescription(String skillDescription) {
+        this.skillDescription = skillDescription;
+    }
 }
