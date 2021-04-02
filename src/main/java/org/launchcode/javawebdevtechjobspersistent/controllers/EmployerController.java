@@ -48,7 +48,8 @@ public class EmployerController {
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
-        //replacing null (optEmployer) with findById() method to look for employer object from data layer
+       //replacing null (optEmployer) with findById() method to look
+        // for employer object from data layer
         Optional optEmployer = employerRepository.findById(employerId);
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();

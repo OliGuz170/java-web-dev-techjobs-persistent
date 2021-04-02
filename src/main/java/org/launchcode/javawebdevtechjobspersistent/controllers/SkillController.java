@@ -42,18 +42,18 @@ public class SkillController {
         return "redirect:";
     }
 
-//    @GetMapping("view/{skills}") //***SHOULD THIS BE skillId??? line 45/46
-//    public String displayViewSkill(Model model, @PathVariable int skills) {
-//
-//        Optional optSkill = skillRepository.findById();
-//        if (optSkill.isPresent()) {
-//            Skill skill = (Skill) optSkill.get();
-//            model.addAttribute("skills", skills);
-//            return "skills/view";
-//        } else {
-//            return "redirect:../";
-//        }
-//    }
+    @GetMapping("view/{skillId}") //***SHOULD THIS BE skillId??? line 45/46
+    public String displayViewSkill(Model model, @PathVariable int skillId) {
+
+        Optional optEmployer = skillRepository.findById(skillId);
+        if (optEmployer.isPresent()) {
+            Skill skill = (Skill) optEmployer.get();
+            model.addAttribute("skills", skill);
+            return "skills/view";
+        } else {
+            return "redirect:../";
+        }
+    }
 }
 
 //Copied from EmployerController. Replaced "Employer" w/ "Skill"
