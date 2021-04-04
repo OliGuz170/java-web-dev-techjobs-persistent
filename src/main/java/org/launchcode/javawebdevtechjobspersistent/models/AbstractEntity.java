@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@MappedSuperclass
+@MappedSuperclass //parent class
 public abstract class AbstractEntity {
 
     //Since subclasses of AbstractEntity will be entities
@@ -15,7 +15,6 @@ public abstract class AbstractEntity {
     @Id
     @GeneratedValue
     private int id;
-
 
     @NotBlank //added to that use cannot leave field blank
     @Size(max = 100) //employer names might be > 50 char
@@ -38,12 +37,15 @@ public abstract class AbstractEntity {
         return name;
     }
 
+    /*
+    Replaced 'that' w/ entity (18.2.1)
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractEntity that = (AbstractEntity) o;
-        return id == that.id;
+        AbstractEntity entity = (AbstractEntity) o;
+        return id == entity.id;
     }
 
     @Override

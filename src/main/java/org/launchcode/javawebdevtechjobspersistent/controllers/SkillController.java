@@ -1,6 +1,8 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Skill;
+import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,13 @@ public class SkillController {
     @Autowired
     private SkillRepository skillRepository;
 
-    @GetMapping
+    @Autowired
+    private EmployerRepository employerRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
+
+    @GetMapping("skills")
     public String displaySkillsIndex(Model model){
         model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
@@ -36,10 +44,10 @@ public class SkillController {
 
         if (errors.hasErrors()) {
             return "skills/add";
+        } else {
+            skillRepository.save(newSkill);
+            return "redirect:";
         }
-
-        skillRepository.save(newSkill);
-        return "redirect:";
     }
 
     @GetMapping("view/{skillId}") //***SHOULD THIS BE skillId??? line 45/46

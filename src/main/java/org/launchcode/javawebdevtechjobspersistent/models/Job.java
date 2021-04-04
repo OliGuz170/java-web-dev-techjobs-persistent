@@ -1,6 +1,7 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,23 +19,23 @@ public class Job extends AbstractEntity {
     */
 
     @ManyToOne
+    @NotNull
     private Employer employer;
 
     /*
-    Updated Many-Many relationship w/ skills
+    Updated Many-Many relationship w/ skill
     Changed skills type
      */
     @ManyToMany
     private List<Skill> skills = new ArrayList<>();
 
-    public Job() {
-    }
+    public Job() {}
 
     /*
     Changed employer type to Employer (line 29 & getter/setter)
     Changed skills type & getter/setter
      */
-    public Job(Employer anEmployer, List<Skill> someSkills) {
+    public Job(Employer anEmployer, List<Skill> someSkills, Employer employer) {
         super();
         this.employer = anEmployer;
         this.skills = someSkills;

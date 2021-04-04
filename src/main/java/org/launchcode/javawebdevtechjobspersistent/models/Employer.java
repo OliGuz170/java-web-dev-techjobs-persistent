@@ -15,17 +15,19 @@ public class Employer extends AbstractEntity {
     @Size(max = 50)
     private String location;
 
-    @OneToMany//(mappedBy = "Job") ***Not sure, need to check
-    @JoinColumn
-    private List<Job> jobs = new ArrayList<>();
+    //added field to store jobs
+    @OneToMany(mappedBy = "employer")
+    //@JoinColumn - added per instructions, but get error
+    private final List<Job> jobs = new ArrayList<>();
 
-    @NotBlank
-    @Size (max = 50)
-    public Employer(String location){
+    public Employer(@NotBlank @Size(max = 50) String location){
         this.location = location;
     }
 
-    //added a no-arg constructor to instantiate an object
+    /*
+    added a no-arg constructor to instantiate an object
+    always needed within an Entity class
+     */
     public Employer(){}
 
     public String getLocation() {

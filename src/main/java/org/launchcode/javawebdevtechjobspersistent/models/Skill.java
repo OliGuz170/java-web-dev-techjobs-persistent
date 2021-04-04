@@ -10,25 +10,25 @@ import java.util.List;
 public class Skill extends AbstractEntity {
 
     @Size(min = 0, max = 500)
-    private String skillDescription;
+    private String description;
 
     /*
     Added jobs field of List type
      */
-    @ManyToMany(mappedBy = "skills")
+    @ManyToMany(mappedBy="skills")
     private List<Job> jobs = new ArrayList<>();
 
-    public Skill(@Size(max = 500) String skillDescription){
-        this.skillDescription = skillDescription;
+    public Skill(@Size(max = 500) String description){
+        this.description = description;
     }
 
     public Skill () {}
 
-    public String getSkillDescription() {
-        return skillDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSkillDescription(String skillDescription) {
-        this.skillDescription = skillDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
