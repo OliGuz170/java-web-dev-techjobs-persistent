@@ -1,6 +1,8 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
+import org.launchcode.javawebdevtechjobspersistent.models.Employer;
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
+import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.launchcode.javawebdevtechjobspersistent.models.JobData;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -40,13 +43,21 @@ public class ListController {
 
     }
 
-    /*
-    Added model.addAttribute for employers & skills
-     */
+    //Added model.addAttribute for employers & skills
     @RequestMapping("")
     public String list(Model model) {
-        model.addAttribute("employers", employerRepository.findAll());
-        model.addAttribute("skills", skillRepository.findAll());
+/*
+Added lines 52-56 on 4/4
+ */
+        List<Employer> employers = (List<Employer>) employerRepository.findAll();
+        model.addAttribute("employers", employers);
+
+        List<Skill> skills = (List<Skill>) skillRepository.findAll();
+        model.addAttribute("skills", skills);
+
+/*Removed: lines 50-51*/
+//        model.addAttribute("employers", employerRepository.findAll());
+//        model.addAttribute("skills", skillRepository.findAll());
 
         return "list";
     }

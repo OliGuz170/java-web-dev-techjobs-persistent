@@ -26,8 +26,16 @@ public class SkillController {
     @Autowired
     private JobRepository jobRepository;
 
-    @GetMapping("skills")
-    public String displaySkillsIndex(Model model){
+/*Removed: lines 30-34 on 4/4 */
+//    @GetMapping("skills")
+//    public String displaySkillsIndex(Model model){
+//        model.addAttribute("skills", skillRepository.findAll());
+//        return "skills/index";
+//    }
+
+/*Added: lines 27-41 on 4/4  */
+    @RequestMapping("")
+    public String index(Model model) {
         model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
     }
@@ -44,19 +52,19 @@ public class SkillController {
 
         if (errors.hasErrors()) {
             return "skills/add";
-        } else {
+        } //else {  /*removed else{ from line 47 */
             skillRepository.save(newSkill);
             return "redirect:";
         }
-    }
 
-    @GetMapping("view/{skillId}") //***SHOULD THIS BE skillId??? line 45/46
+
+    @GetMapping("view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
 
-        Optional optEmployer = skillRepository.findById(skillId);
-        if (optEmployer.isPresent()) {
-            Skill skill = (Skill) optEmployer.get();
-            model.addAttribute("skills", skill);
+        Optional optSkill = skillRepository.findById(skillId);
+        if (optSkill.isPresent()) {
+            Skill skill = (Skill) optSkill.get();
+            model.addAttribute("skill", skill);
             return "skills/view";
         } else {
             return "redirect:../";

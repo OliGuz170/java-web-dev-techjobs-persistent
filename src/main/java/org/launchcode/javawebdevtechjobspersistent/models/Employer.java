@@ -15,14 +15,21 @@ public class Employer extends AbstractEntity {
     @Size(max = 50)
     private String location;
 
-    //added field to store jobs
-    @OneToMany(mappedBy = "employer")
-    //@JoinColumn - added per instructions, but get error
+/*removed: lines 19-26 on 4/4*/
+//    //added field to store jobs
+//    @OneToMany(mappedBy = "employer")
+//    //@JoinColumn - added per instructions, but get error
+//    private final List<Job> jobs = new ArrayList<>();
+//
+//    public Employer(@NotBlank @Size(max = 50) String location){
+//        this.location = location;
+    //}
+/*
+Added lines: 30-32 on 4/4
+ */
+    @OneToMany
+    @JoinColumn(name = "employer_id")
     private final List<Job> jobs = new ArrayList<>();
-
-    public Employer(@NotBlank @Size(max = 50) String location){
-        this.location = location;
-    }
 
     /*
     added a no-arg constructor to instantiate an object

@@ -37,15 +37,12 @@ public abstract class AbstractEntity {
         return name;
     }
 
-    /*
-    Replaced 'that' w/ entity (18.2.1)
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AbstractEntity entity = (AbstractEntity) o;
-        return id == entity.id;
+        AbstractEntity that = (AbstractEntity) o;
+        return id == that.id;
     }
 
     @Override

@@ -26,12 +26,14 @@ public class EmployerController {
 
     @Autowired
     private SkillRepository skillRepository;
-
-    //index method - responds with list of all employers in database
-    //CRUD findAll() method - iterable; returns list of all employers
-    //17.3.2 video
-    @GetMapping("employers")
-    public String displayEmployerIndex(Model model) {
+/*
+Changed @RequestMapping to @GetMapping line 35, and "index" to "employersViewAll" line36,
+and added "employers/" in front of "index" line 37 on 4/4
+ */
+    //Added index method that responds w/ list of employer in database.
+    // Used method in other controllers as guidance
+    @GetMapping("")
+    public String employersViewAll(Model model) {
         model.addAttribute("employers", employerRepository.findAll());
         return "employers/index";
     }
@@ -46,28 +48,28 @@ public class EmployerController {
     @PostMapping("add")
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
                                          Errors errors, Model model) {
-
+/*Removed line 57: else{, and extra } on line 54 on 4/4 */
         if (errors.hasErrors()) {
             return "employers/add";
+        } //else{
+
+        employerRepository.save(newEmployer); //newEmployer will be saved
+        return "redirect:";
+    }
+
+    //renders page to view contents of an individual employer object
+    @GetMapping("view/{employerId}")
+    public String displayViewEmployer(Model model, @PathVariable int employerId) {
+
+        //replacing null (optEmployer) with findById() method to look
+        // for employer object from data layer
+        Optional<Employer> optEmployer = employerRepository.findById(employerId);
+        if (optEmployer.isPresent()) {
+            Employer employer = (Employer) optEmployer.get();
+            model.addAttribute("employer", employer);
+            return "employers/view";
         } else {
-
-            employerRepository.save(newEmployer); //newEmployer will be saved
-            return "redirect:";
+            return "redirect:../";
         }
     }
-        //renders page to view contents of an individual employer object
-        @GetMapping("view/{employerId}")
-        public String displayViewEmployer (Model model,@PathVariable int employerId){
-
-            //replacing null (optEmployer) with findById() method to look
-            // for employer object from data layer
-            Optional optEmployer = employerRepository.findById(employerId);
-            if (optEmployer.isPresent()) {
-                Employer employer = (Employer) optEmployer.get();
-                model.addAttribute("employer", employer);
-                return "employers/view";
-            } else {
-                return "redirect:../";
-            }
-        }
-    }
+}
