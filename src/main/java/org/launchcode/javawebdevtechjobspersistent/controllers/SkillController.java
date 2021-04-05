@@ -26,16 +26,8 @@ public class SkillController {
     @Autowired
     private JobRepository jobRepository;
 
-/*Removed: lines 30-34 on 4/4 */
-//    @GetMapping("skills")
-//    public String displaySkillsIndex(Model model){
-//        model.addAttribute("skills", skillRepository.findAll());
-//        return "skills/index";
-//    }
-
-/*Added: lines 27-41 on 4/4  */
-    @RequestMapping("")
-    public String index(Model model) {
+    @GetMapping("")
+    public String skillsViewAll(Model model) {
         model.addAttribute("skills", skillRepository.findAll());
         return "skills/index";
     }
@@ -51,12 +43,12 @@ public class SkillController {
                                          Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute((newSkill));
             return "skills/add";
         } //else {  /*removed else{ from line 47 */
             skillRepository.save(newSkill);
             return "redirect:";
         }
-
 
     @GetMapping("view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
@@ -71,7 +63,3 @@ public class SkillController {
         }
     }
 }
-
-//Copied from EmployerController. Replaced "Employer" w/ "Skill"
-//NOTE: NOT COMPLETELY SURE IF I USED SKILL & SKILLS CORRECTLY
-//NOTE: NOT SURE IF LINE 48 FINDBYID USE IS CORRECT

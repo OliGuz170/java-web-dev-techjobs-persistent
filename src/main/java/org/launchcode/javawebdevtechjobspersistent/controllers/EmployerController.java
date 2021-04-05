@@ -26,12 +26,8 @@ public class EmployerController {
 
     @Autowired
     private SkillRepository skillRepository;
-/*
-Changed @RequestMapping to @GetMapping line 35, and "index" to "employersViewAll" line36,
-and added "employers/" in front of "index" line 37 on 4/4
- */
+
     //Added index method that responds w/ list of employer in database.
-    // Used method in other controllers as guidance
     @GetMapping("")
     public String employersViewAll(Model model) {
         model.addAttribute("employers", employerRepository.findAll());
@@ -48,11 +44,9 @@ and added "employers/" in front of "index" line 37 on 4/4
     @PostMapping("add")
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
                                          Errors errors, Model model) {
-/*Removed line 57: else{, and extra } on line 54 on 4/4 */
         if (errors.hasErrors()) {
             return "employers/add";
-        } //else{
-
+        }
         employerRepository.save(newEmployer); //newEmployer will be saved
         return "redirect:";
     }

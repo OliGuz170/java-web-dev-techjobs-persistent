@@ -15,29 +15,19 @@ public class Job extends AbstractEntity {
     private String name;
     private String employer;
 
-    Changed employer type to Employer
-    */
+    Changed employer type to Employer  */
 
     @ManyToOne
-    //@NotNull
     private Employer employer;
 
-/*
-Removed line 32 on 4/4
-Added line 33  on 4/4
- */
     //Updated Many-Many relationship w/ skill
     //Changed skills type
     @ManyToMany
-    //private List<Skill> skills = new ArrayList<>();
     private List<Skill> skills;
 
     public Job() {}
 
-    /*
-    Changed employer type to Employer (line 29 & getter/setter)
-    Changed skills type & getter/setter
-     */
+    //Changed employer & skills type + getter & setters
     public Job(Employer anEmployer, List<Skill> someSkills) {
         super();
         this.employer = anEmployer;

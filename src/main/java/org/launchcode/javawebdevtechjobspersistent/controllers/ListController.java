@@ -36,29 +36,16 @@ public class ListController {
     static HashMap<String, String> columnChoices = new HashMap<>();
 
     public ListController () {
-
         columnChoices.put("all", "All");
         columnChoices.put("employer", "Employer");
         columnChoices.put("skill", "Skill");
-
     }
 
     //Added model.addAttribute for employers & skills
     @RequestMapping("")
     public String list(Model model) {
-/*
-Added lines 52-56 on 4/4
- */
-        List<Employer> employers = (List<Employer>) employerRepository.findAll();
-        model.addAttribute("employers", employers);
-
-        List<Skill> skills = (List<Skill>) skillRepository.findAll();
-        model.addAttribute("skills", skills);
-
-/*Removed: lines 50-51*/
-//        model.addAttribute("employers", employerRepository.findAll());
-//        model.addAttribute("skills", skillRepository.findAll());
-
+        model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
         return "list";
     }
 
@@ -73,7 +60,6 @@ Added lines 52-56 on 4/4
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
         }
         model.addAttribute("jobs", jobs);
-
         return "list-jobs";
     }
 }
