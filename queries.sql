@@ -19,3 +19,5 @@ SELECT name, description
 FROM skill
 WHERE description IS NOT NULL
 ORDER BY name ASC;
+
+--ORDER BY name;

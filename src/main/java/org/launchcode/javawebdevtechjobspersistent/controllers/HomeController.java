@@ -39,6 +39,12 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("list-jobs")
+    public String jobsViewAll(Model  model){
+        model.addAttribute("jobs", jobRepository.findAll());
+        return "list-jobs";
+    }
+
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
         model.addAttribute("title", "Add Job");
@@ -60,6 +66,7 @@ public class HomeController {
             return "add";
         }
         model.addAttribute("employers", employerRepository.findById(employerId));
+
         model.addAttribute("skills", skillRepository.findAll());
         model.addAttribute("jobs", jobRepository.findAll());
 

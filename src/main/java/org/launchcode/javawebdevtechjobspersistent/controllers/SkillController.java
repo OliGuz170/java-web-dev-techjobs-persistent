@@ -45,7 +45,7 @@ public class SkillController {
         if (errors.hasErrors()) {
             model.addAttribute((newSkill));
             return "skills/add";
-        } //else {  /*removed else{ from line 47 */
+        }
             skillRepository.save(newSkill);
             return "redirect:";
         }
@@ -53,7 +53,7 @@ public class SkillController {
     @GetMapping("view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
 
-        Optional optSkill = skillRepository.findById(skillId);
+        Optional<Skill> optSkill = skillRepository.findById(skillId);
         if (optSkill.isPresent()) {
             Skill skill = (Skill) optSkill.get();
             model.addAttribute("skill", skill);
